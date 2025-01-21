@@ -1,0 +1,18 @@
+current directory: /Users/admin/Documents/sampleDrawer/sampleDrawer/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+/Users/admin/.rvm/rubies/ruby-3.3.1/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/admin/Documents/sampleDrawer/sampleDrawer/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20250121-2656-h6fgz7 sitelibdir\=./.gem.20250121-2656-h6fgz7 clean
+
+current directory: /Users/admin/Documents/sampleDrawer/sampleDrawer/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20250121-2656-h6fgz7 sitelibdir\=./.gem.20250121-2656-h6fgz7
+compiling nkf.c
+linking shared-object nkf.bundle
+
+current directory: /Users/admin/Documents/sampleDrawer/sampleDrawer/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20250121-2656-h6fgz7 sitelibdir\=./.gem.20250121-2656-h6fgz7 install
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 nkf.bundle ./.gem.20250121-2656-h6fgz7
+
+current directory: /Users/admin/Documents/sampleDrawer/sampleDrawer/vendor/bundle/ruby/3.3.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20250121-2656-h6fgz7 sitelibdir\=./.gem.20250121-2656-h6fgz7 clean
