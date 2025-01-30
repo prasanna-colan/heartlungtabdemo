@@ -10,7 +10,9 @@ import {
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import 'react-native-reanimated';
-import {Dashboard, Form1, Form2, Home, Login} from './src/screens';
+import {Dashboard, Form1, Form2, Home, Login,} from './src/screens';
+
+
 
 const Drawer = createDrawerNavigator();
 
@@ -49,21 +51,23 @@ export default function App() {
       <Text style={styles.headerTitle}>Custom Dashboard Header</Text>
     </View>
   );
+  const AuthHeader = ({navigation}) => (
+    <View style={styles.AuthheaderContainer}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text style={styles.AuthbackText}>Back</Text>
+      </TouchableOpacity>
+    </View>
+  );
   const CustomContent = ({navigation}) => (
     <View
       style={{
         flex: 1,
-        backgroundColor: 'orange',
-        borderTopRightRadius: 0,
         borderBottomRightRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
       }}>
       <Image
-        src={
-          'https://t3.ftcdn.net/jpg/06/14/84/58/360_F_614845842_pNcPaSxVwBiO6hGaaSXKrQOCs6xqnijX.jpg'
-        }
-        style={{height: 100, width: 100}}
+        source={require('./assets/images/bg.png')}
+        style={{height:"100%", width: "100%",
+          borderBottomRightRadius: 20,}}
       />
       <Text style={styles.text}>Drawer Content</Text>
     </View>
@@ -125,7 +129,7 @@ export default function App() {
           return <DrawerContent navigation={navigation} />; // No drawer content for other screens
         }}>
         <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Home" component={Home} options={{headerShown: true,header: ({navigation}) => <AuthHeader navigation={navigation} />}} />
         <Drawer.Screen
           name="Dashboard"
           component={Dashboard}
@@ -209,6 +213,17 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowRadius: 4,
   },
+  AuthheaderContainer: {
+    height: 60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    elevation: 4, // Adds shadow on Android
+    shadowColor: '#000', // Adds shadow on iOS
+    shadowOpacity: 0.1,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 4,
+  },
   backText: {
     fontSize: 16,
     color: '#fff',
@@ -220,5 +235,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     marginLeft: 10,
+  },
+  AuthbackText: {
+    fontSize: 16,
+    color: '#000',
+    fontWeight: 'bold',
+    marginRight: 10,
   },
 });

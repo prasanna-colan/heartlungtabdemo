@@ -1,20 +1,20 @@
 {
-  "root": "/Users/admin/Documents/sampleDrawer/sampleDrawer",
-  "reactNativePath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native",
+  "root": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo",
+  "reactNativePath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native",
   "reactNativeVersion": "0.76",
   "dependencies": {
     "react-native-gesture-handler": {
-      "root": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-gesture-handler",
+      "root": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-gesture-handler",
       "name": "react-native-gesture-handler",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-gesture-handler/RNGestureHandler.podspec",
-          "version": "2.22.0",
+          "podspecPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-gesture-handler/RNGestureHandler.podspec",
+          "version": "2.22.1",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-gesture-handler/android",
+          "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-gesture-handler/android",
           "packageImportPath": "import com.swmansion.gesturehandler.RNGestureHandlerPackage;",
           "packageInstance": "new RNGestureHandlerPackage()",
           "buildTypes": [],
@@ -23,7 +23,7 @@
             "RNGestureHandlerButtonComponentDescriptor",
             "RNGestureHandlerRootViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -32,23 +32,23 @@
       }
     },
     "react-native-reanimated": {
-      "root": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-reanimated",
+      "root": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-reanimated",
       "name": "react-native-reanimated",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-reanimated/RNReanimated.podspec",
+          "podspecPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-reanimated/RNReanimated.podspec",
           "version": "3.16.7",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-reanimated/android",
+          "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-reanimated/android",
           "packageImportPath": "import com.swmansion.reanimated.ReanimatedPackage;",
           "packageInstance": "new ReanimatedPackage()",
           "buildTypes": [],
           "libraryName": "rnreanimated",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -57,17 +57,17 @@
       }
     },
     "react-native-safe-area-context": {
-      "root": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-safe-area-context",
+      "root": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-safe-area-context",
       "name": "react-native-safe-area-context",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
+          "podspecPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
           "version": "5.1.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-safe-area-context/android",
+          "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-safe-area-context/android",
           "packageImportPath": "import com.th3rdwave.safeareacontext.SafeAreaContextPackage;",
           "packageInstance": "new SafeAreaContextPackage()",
           "buildTypes": [],
@@ -76,7 +76,7 @@
             "RNCSafeAreaProviderComponentDescriptor",
             "RNCSafeAreaViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -85,17 +85,17 @@
       }
     },
     "react-native-screens": {
-      "root": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-screens",
+      "root": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-screens",
       "name": "react-native-screens",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-screens/RNScreens.podspec",
+          "podspecPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-screens/RNScreens.podspec",
           "version": "4.5.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-screens/android",
+          "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-screens/android",
           "packageImportPath": "import com.swmansion.rnscreens.RNScreensPackage;",
           "packageInstance": "new RNScreensPackage()",
           "buildTypes": [],
@@ -113,7 +113,7 @@
             "RNSScreenContentWrapperComponentDescriptor",
             "RNSModalScreenComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -122,23 +122,23 @@
       }
     },
     "react-native-vector-icons": {
-      "root": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-vector-icons",
+      "root": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-vector-icons",
       "name": "react-native-vector-icons",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-vector-icons/RNVectorIcons.podspec",
+          "podspecPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-vector-icons/RNVectorIcons.podspec",
           "version": "10.2.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-vector-icons/android",
+          "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-vector-icons/android",
           "packageImportPath": "import com.oblador.vectoricons.VectorIconsPackage;",
           "packageInstance": "new VectorIconsPackage()",
           "buildTypes": [],
           "libraryName": "RNVectorIconsSpec",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/admin/Documents/sampleDrawer/sampleDrawer/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -304,7 +304,7 @@
         {
           "name": "--path <path>",
           "description": "Path to the React Native project root.",
-          "default": "/Users/admin/Documents/sampleDrawer/sampleDrawer"
+          "default": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo"
         },
         {
           "name": "--platform <string>",
@@ -591,7 +591,7 @@
   "assets": [],
   "project": {
     "ios": {
-      "sourceDir": "/Users/admin/Documents/sampleDrawer/sampleDrawer/ios",
+      "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/ios",
       "xcodeProject": {
         "name": "sampleDrawer.xcworkspace",
         "path": ".",
@@ -600,7 +600,7 @@
       "assets": []
     },
     "android": {
-      "sourceDir": "/Users/admin/Documents/sampleDrawer/sampleDrawer/android",
+      "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/android",
       "appName": "app",
       "packageName": "com.sampledrawer",
       "applicationId": "com.sampledrawer",
