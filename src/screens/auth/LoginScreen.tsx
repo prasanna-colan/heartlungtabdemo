@@ -39,7 +39,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
           placeholder="Password" mainStyle={{ width: "80%", }} secureTextEntry />
         <Text style={styles.forgotPwdText}>{"Forget Password ?"} </Text>
 <View style={{marginTop:mvs(40)}}/>
-        <AppButton disabled={email == "" || password == ""} title='Continue your onboarding' onPress={() => { navigation.navigate('Home')}} />
+        <AppButton disabled={email == "" || password == ""} title='Continue your onboarding' onPress={() => { navigation.navigate('OnboardScreen')}} />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   )

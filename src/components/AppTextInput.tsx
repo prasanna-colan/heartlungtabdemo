@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, ViewStyle, TextStyle, TextInputProps } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable, ViewStyle, TextStyle, TextInputProps, KeyboardTypeOptions } from 'react-native';
 import { mvs } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon library
 import { COLORS } from '../../assets/colors';
@@ -7,10 +7,11 @@ import { AppBorderRadius } from '../constants';
 
 // Define types for the props
 interface AppTextInputProps {
-  label?: string; // Label for the input field
-  value: string; // Value of the input
+  label?: string | number; // Label for the input field
+  value: string | number | undefined ; // Value of the input
   onChangeText: (text: string) => void; // Function to handle text change
   placeholder?: string; // Placeholder text
+  keyboardType?: 'default' | 'email' | 'phoneNumber' | 'numberPad'; // Custom type options
   secureTextEntry?: boolean; // For password fields
   inputStyle?: TextStyle; // Custom style for the input field
   labelStyle?: TextStyle; // Custom style for the label
@@ -23,6 +24,7 @@ const AppTextInput: React.FC<AppTextInputProps> = ({
   onChangeText,
   placeholder,
   secureTextEntry = false,
+  keyboardType = 'default',
   inputStyle = {},
   labelStyle = {},
   mainStyle = {},
@@ -31,6 +33,19 @@ const AppTextInput: React.FC<AppTextInputProps> = ({
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible); // Toggle visibility
+  };
+
+  const getKeyboardType = (): KeyboardTypeOptions => {
+    switch (keyboardType) {
+      case 'email':
+        return 'email-address';
+      case 'phoneNumber':
+        return 'phone-pad';
+        case 'numberPad':
+        return 'number-pad';
+      default:
+        return 'default';
+    }
   };
 
   return (
@@ -44,11 +59,12 @@ const AppTextInput: React.FC<AppTextInputProps> = ({
       {/* Text Input */}
       <View style={styles.inputContainer}>
         <TextInput
+          keyboardType={getKeyboardType()}
           style={[styles.input, inputStyle]}
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor={styles.placeholderColor}
+          placeholderTextColor={COLORS.GrayText}
           secureTextEntry={isPasswordVisible}  // Toggle based on state
         />
         
@@ -92,9 +108,6 @@ const styles = StyleSheet.create({
   icon: {
     paddingRight:mvs(10),
     backgroundColor: COLORS.LightGray,
-  },
-  placeholderColor:{
-    color:COLORS.GrayText
   }
 });
 

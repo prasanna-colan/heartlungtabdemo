@@ -5,6 +5,7 @@ import { RouteProp } from '@react-navigation/native';
 export type RootStackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
+  OnboardScreen: undefined;
   ForgotPasswordScreen: undefined;
   ProfileScreen: undefined;
   Home: undefined;
@@ -17,7 +18,12 @@ export type AuthScreenProps<T extends keyof RootStackParamList> = {
 };
 
 // Predefined types for each auth screen
+// Auth
 export type LoginScreenProps = AuthScreenProps<'LoginScreen'>;
 export type RegisterScreenProps = AuthScreenProps<'RegisterScreen'>;
+export type OnboardScreenProps = AuthScreenProps<'OnboardScreen'>;
+
+
+
 export type ForgotPasswordScreenProps = AuthScreenProps<'ForgotPasswordScreen'>;
 export type ProfileScreenProps = AuthScreenProps<'ProfileScreen'>;

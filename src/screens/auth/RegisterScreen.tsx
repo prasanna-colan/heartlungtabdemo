@@ -18,7 +18,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
         <Image style={{ marginTop: "10%", width: mvs(140), height: mvs(40), resizeMode: "contain"  }} source={require('../../../assets/images/logo.png')} />
         <View style={{ marginTop: "15%", }}>
           <Text style={styles.heading}>{"Create an account"}</Text>
-          <Text style={styles.subHeading}>{"Already have an account?"} <Text style={[styles.subHeading, styles.loginTxt]}>{"Log in"}</Text></Text>
+          <Text style={styles.subHeading}>{"Already have an account?"} <Text onPress={()=>{navigation.navigate("LoginScreen")}} style={[styles.subHeading, styles.loginTxt]}>{"Log in"}</Text></Text>
         </View>
 
         <AppTextInput
@@ -33,7 +33,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
 
         <View style={{ flexDirection: "row", marginTop: mvs(60), alignItems: "center" }}>
 
-          <Pressable style={{top: mvs(7)}} onPress={() => setIsPrivacyAgreed(!isPrivacyAgreed)}>
+          <Pressable style={{top: mvs(5)}} onPress={() => setIsPrivacyAgreed(!isPrivacyAgreed)}>
             {
               isPrivacyAgreed ?
                 <Checkbox width={ms(20)} height={mvs(20)}/> :
@@ -41,7 +41,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
             }
           </Pressable>
 
-          <Text style={styles.subHeading}>{" Already have an account?"} <Pressable style={{marginTop: mvs(8)}} onPress={()=>{navigation.navigate("LoginScreen")}}><Text style={[styles.subHeading, styles.loginTxt]}>{"Log in"}</Text></Pressable></Text>
+          <Text style={styles.subHeading}>{" I agree with the"} <Text onPress={()=>{navigation.navigate("LoginScreen")}} style={[styles.subHeading, styles.loginTxt]}>{"privacy policy"}</Text></Text>
         </View>
 
         <AppButton disabled={email == "" || !isPrivacyAgreed} title='Continue' onPress={() => { }} />

@@ -10,7 +10,7 @@ import {
 import { createDrawerNavigator, DrawerScreenProps } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-reanimated';
-import { LoginScreen, RegisterScreen } from './src/screens/auth';
+import { LoginScreen, OnboardScreen, RegisterScreen } from './src/screens/auth';
 import { Home, Dashboard, Form1, Form2 } from './src/screens/navigation';
 import DrawerScreenImage from "./assets/images/svg/DrawerScreenImage.svg";
 import { mvs } from 'react-native-size-matters';
@@ -19,6 +19,7 @@ import { COLORS } from './assets/colors';
 type RootDrawerParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
+  OnboardScreen: undefined;
   Home: undefined;
   Dashboard: undefined;
   Form1: undefined;
@@ -53,7 +54,7 @@ export default function App() {
         
         drawerContent={({ navigation, state }) => {
           const currentRoute = state?.routes[state.index]?.name;
-          if (currentRoute === 'Home' || currentRoute === 'LoginScreen' || currentRoute === 'RegisterScreen') {
+          if (currentRoute === 'Home' || currentRoute === 'LoginScreen' || currentRoute === 'RegisterScreen' || currentRoute === 'OnboardScreen') {
             return <CustomContent navigation={navigation} />;
           }
           return <DrawerContent navigation={navigation} />;
@@ -61,10 +62,12 @@ export default function App() {
       >
         <Drawer.Screen name="LoginScreen" component={LoginScreen} />
         <Drawer.Screen name="RegisterScreen" component={RegisterScreen} />
+        <Drawer.Screen name="OnboardScreen" component={OnboardScreen} />
+        
         <Drawer.Screen
           name="Home"
           component={Home}
-          options={{ headerShown: true, header: ({ navigation }) => <AuthHeader navigation={navigation} /> }}
+          options={{ headerShown: false, header: ({ navigation }) => <AuthHeader navigation={navigation} /> }}
         />
         <Drawer.Screen
           name="Dashboard"
