@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View,SafeAreaView,Pressable,Image } from 'react-native'
 import React from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import CommonTextInput from '../components/CommonTextInput'
-
-const Login = ({navigation}) => {
+import AppTextInput from '../../components/AppTextInput'
+import Logo from "../../../assets/images/logo.png"
+const LoginScreen = ({navigation}) => {
   
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView style={{flex:1}} contentContainerStyle={[{flexGrow:1}]}>
-      <Image style={{width:200,height:200,resizeMode:"contain"}} source={require('../../assets/images/logo.png')}/>
-      <Text style={styles.heading}>{" Welcome to your \n LiveLong account"}</Text>
-      <CommonTextInput label="Email" placeholder="Enter your email" mainStyle={{marginRight:150,marginLeft:15,marginTop:15}} />
-      <CommonTextInput label="Password" placeholder="Enter your Password" mainStyle={{marginRight:150,marginLeft:15,marginTop:15}} secureTextEntry />
+      <Image style={{width:200,height:200,resizeMode:"contain"}} source={Logo}/>
+      <Text style={styles.heading}>{"Welcome to your \nLiveLong account"}</Text>
+      <AppTextInput label="Email" placeholder="Enter your email" mainStyle={{marginRight:150,marginLeft:15,marginTop:15}} />
+      <AppTextInput label="Password" placeholder="Enter your Password" mainStyle={{marginRight:150,marginLeft:15,marginTop:15}} secureTextEntry />
       <Text style={styles.forgotPassword}>{"Forgot Password ?"}</Text>
       <Pressable style={styles.button} onPress={() =>{ navigation.navigate('Home') }}>
         <Text style={{color:"white",fontSize:18}}>Continue</Text>
@@ -21,7 +21,7 @@ const Login = ({navigation}) => {
   )
 }
 
-export default Login
+export default LoginScreen
 
 const styles = StyleSheet.create({
     container:{

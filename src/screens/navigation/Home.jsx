@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AppBackButton from "../../components/AppBackButton";
 const headerData = [
   {
     id: 1,
@@ -52,9 +53,10 @@ const Home = ({ navigation }) => {
       style={{flex: 1,}}
         contentContainerStyle={[{ flexGrow: 1 }, styles.container]}
       >
+        <AppBackButton onPress={()=> navigation.goBack()}/>
         <Image
           style={{ width: 200, height: 100, resizeMode: "contain" }}
-          source={require("../../assets/images/logo.png")}
+          source={require("../../../assets/images/logo.png")}
         />
         <FlatList
           data={data}

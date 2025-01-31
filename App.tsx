@@ -1,193 +1,123 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dimensions,
   View,
   Text,
-  StyleSheet,
   Image,
   TouchableOpacity,
+  StyleSheet
 } from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
+import { createDrawerNavigator, DrawerScreenProps } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-reanimated';
-import {Dashboard, Form1, Form2, Home, Login,} from './src/screens';
+import { LoginScreen, RegisterScreen } from './src/screens/auth';
+import { Home, Dashboard, Form1, Form2 } from './src/screens/navigation';
+import DrawerScreenImage from "./assets/images/svg/DrawerScreenImage.svg";
+import { mvs } from 'react-native-size-matters';
+import { COLORS } from './assets/colors';
 
+type RootDrawerParamList = {
+  LoginScreen: undefined;
+  RegisterScreen: undefined;
+  Home: undefined;
+  Dashboard: undefined;
+  Form1: undefined;
+  Form2: undefined;
+};
 
-
-const Drawer = createDrawerNavigator();
-
-// Sample Screens
+const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
 export default function App() {
   const [drawerWidth, setDrawerWidth] = useState(getDrawerWidth());
-  const [auth, setAuth] = useState(false);
 
-  // Detect orientation changes
   useEffect(() => {
-    const handleOrientationChange = () => {
-      setDrawerWidth(getDrawerWidth());
-    };
-
-    const subscription = Dimensions.addEventListener(
-      'change',
-      handleOrientationChange,
-    );
-
-    return () => {
-      subscription?.remove(); // Cleanup listener
-    };
+    const handleOrientationChange = () => setDrawerWidth(getDrawerWidth());
+    const subscription = Dimensions.addEventListener('change', handleOrientationChange);
+    return () => subscription?.remove();
   }, []);
 
-  // Function to calculate drawer width
   function getDrawerWidth() {
-    const {width, height} = Dimensions.get('window');
-    return width > height ? width * 0.5 : width * 0.7; // Adjust widths as needed
+    const { width, height } = Dimensions.get('window');
+    return width > height ? width * 0.5 : width * 0.7;
   }
-  const CustomHeader = ({navigation}) => (
-    <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={styles.backText}>Back</Text>
-      </TouchableOpacity>
-      <Text style={styles.headerTitle}>Custom Dashboard Header</Text>
-    </View>
-  );
-  const AuthHeader = ({navigation}) => (
-    <View style={styles.AuthheaderContainer}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={styles.AuthbackText}>Back</Text>
-      </TouchableOpacity>
-    </View>
-  );
-  const CustomContent = ({navigation}) => (
-    <View
-      style={{
-        flex: 1,
-        borderBottomRightRadius: 20,
-      }}>
-      <Image
-        source={require('./assets/images/bg.png')}
-        style={{height:"100%", width: "100%",
-          borderBottomRightRadius: 20,}}
-      />
-      <Text style={styles.text}>Drawer Content</Text>
-    </View>
-  );
-  const DrawerContent = ({navigation}) => (
-    <View style={{flex: 1, backgroundColor: 'orange', padding: 20}}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Form1')}
-        style={{
-          padding: 5,
-          alignItems: 'center',
-          borderRadius: 5,
-          borderWidth: 1,
-          borderColor: 'white',
-          marginVertical: 10,
-        }}>
-        <Text style={styles.text}>Form1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Form2')}
-        style={{
-          padding: 5,
-          alignItems: 'center',
-          borderRadius: 5,
-          borderWidth: 1,
-          borderColor: 'white',
-          marginVertical: 10,
-        }}>
-        <Text style={styles.text}>Form2</Text>
-      </TouchableOpacity>
-    </View>
-  );
+
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Login"
+        initialRouteName="RegisterScreen"
         screenOptions={{
-          drawerType: 'permanent', // Keeps the drawer open
-          drawerContentContainerStyle: {
-            flex: 1,
-            borderTopRightRadius: 20,
-            borderBottomRightRadius: 20,
-            backgroundColor: 'orange',
-          },
-          drawerStyle: {
-            width: drawerWidth, // Dynamic width
-            borderTopRightRadius: 20,
-            borderBottomRightRadius: 20,
-            backgroundColor: 'orange',
-          },
-          headerShown: false, // Remove header for better layout
+          drawerType: 'permanent',
+          drawerStyle: { width: drawerWidth, backgroundColor: COLORS.white , borderBottomRightRadius:mvs(20)},
+          headerShown: false
         }}
-        drawerContent={({navigation, state}) => {
-          // Conditionally show DrawerContent only for Dashboard
+        
+        drawerContent={({ navigation, state }) => {
           const currentRoute = state?.routes[state.index]?.name;
-          if (currentRoute == 'Home' || currentRoute == 'Login') {
+          if (currentRoute === 'Home' || currentRoute === 'LoginScreen' || currentRoute === 'RegisterScreen') {
             return <CustomContent navigation={navigation} />;
           }
-          return <DrawerContent navigation={navigation} />; // No drawer content for other screens
-        }}>
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Home" component={Home} options={{headerShown: true,header: ({navigation}) => <AuthHeader navigation={navigation} />}} />
+          return <DrawerContent navigation={navigation} />;
+        }}
+      >
+        <Drawer.Screen name="LoginScreen" component={LoginScreen} />
+        <Drawer.Screen name="RegisterScreen" component={RegisterScreen} />
+        <Drawer.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: true, header: ({ navigation }) => <AuthHeader navigation={navigation} /> }}
+        />
         <Drawer.Screen
           name="Dashboard"
           component={Dashboard}
           options={{
-            headerShown: true, // Show header for Dashboard
-            header: ({navigation}) => <CustomHeader navigation={navigation} />,
-            headerTitle: 'Dashboard Header', // Customize header title
-            drawerStyle: {
-              width: drawerWidth * 0.5, // Adjust drawer width for Dashboard
-              backgroundColor: '#FF4500', // Custom background for Dashboard
-            },
-            drawerContentContainerStyle: {
-              flex: 1,
-              backgroundColor: 'orange',
-            },
+            headerShown: true,
+            header: ({ navigation }) => <CustomHeader navigation={navigation} />,
+            drawerStyle: { width: drawerWidth * 0.5, backgroundColor: '#FF4500' }
           }}
         />
-        <Drawer.Screen
-          name="Form1"
-          component={Form1}
-          options={{
-            headerShown: true, // Show header for Dashboard
-            header: ({navigation}) => <CustomHeader navigation={navigation} />,
-            headerTitle: 'Dashboard Header', // Customize header title
-            drawerStyle: {
-              width: drawerWidth * 0.5, // Adjust drawer width for Dashboard
-              backgroundColor: '#FF4500', // Custom background for Dashboard
-            },
-            drawerContentContainerStyle: {
-              flex: 1,
-              backgroundColor: 'orange',
-            },
-          }}
-        />
-        <Drawer.Screen
-          name="Form2"
-          component={Form2}
-          options={{
-            headerShown: true, // Show header for Dashboard
-            header: ({navigation}) => <CustomHeader navigation={navigation} />,
-            headerTitle: 'Dashboard Header', // Customize header title
-            drawerStyle: {
-              width: drawerWidth * 0.5, // Adjust drawer width for Dashboard
-              backgroundColor: '#FF4500', // Custom background for Dashboard
-            },
-            drawerContentContainerStyle: {
-              flex: 1,
-              backgroundColor: 'orange',
-            },
-          }}
-        />
-        <Drawer.Group>
-          <Drawer.Screen name="DrawerContent" component={DrawerContent} />
-        </Drawer.Group>
+        <Drawer.Screen name="Form1" component={Form1} />
+        <Drawer.Screen name="Form2" component={Form2} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
+
+type DrawerNavProps = DrawerScreenProps<RootDrawerParamList, 'Dashboard'>;
+
+const CustomHeader: React.FC<DrawerNavProps> = ({ navigation }) => (
+  <View style={styles.headerContainer}>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
+      <Text style={styles.backText}>Back</Text>
+    </TouchableOpacity>
+    <Text style={styles.headerTitle}>Custom Dashboard Header</Text>
+  </View>
+);
+
+const AuthHeader: React.FC<DrawerNavProps> = ({ navigation }) => (
+  <View style={styles.AuthheaderContainer}>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
+      <Text style={styles.AuthbackText}>Back</Text>
+    </TouchableOpacity>
+  </View>
+);
+
+const CustomContent = ({ navigation }: { navigation: any }) => (
+  <View style={{ flex: 1, borderBottomRightRadius: 20 }}>
+    <Image source={require('./assets/images/bg.png')} style={{ height: '100%', width: '100%', borderBottomRightRadius:mvs(20) }} />
+    {/* <DrawerScreenImage height={"100%"} width={"100%"}/> */}
+  </View>
+);
+
+const DrawerContent = ({ navigation }: { navigation: any }) => (
+  <View style={{ flex: 1, backgroundColor: 'orange', padding: 20 }}>
+    <TouchableOpacity onPress={() => navigation.navigate('Form1')} style={styles.button}>
+      <Text style={styles.text}>Form1</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('Form2')} style={styles.button}>
+      <Text style={styles.text}>Form2</Text>
+    </TouchableOpacity>
+  </View>
+);
 
 const styles = StyleSheet.create({
   screen: {

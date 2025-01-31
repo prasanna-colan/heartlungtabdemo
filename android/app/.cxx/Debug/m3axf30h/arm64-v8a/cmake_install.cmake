@@ -48,6 +48,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/Users/cipl1076/Documents/testprojects/heartlungtabdemo/android/app/.cxx/Debug/m3axf30h/arm64-v8a/rnreanimated_autolinked_build/cmake_install.cmake")
   include("/Users/cipl1076/Documents/testprojects/heartlungtabdemo/android/app/.cxx/Debug/m3axf30h/arm64-v8a/safeareacontext_autolinked_build/cmake_install.cmake")
   include("/Users/cipl1076/Documents/testprojects/heartlungtabdemo/android/app/.cxx/Debug/m3axf30h/arm64-v8a/rnscreens_autolinked_build/cmake_install.cmake")
+  include("/Users/cipl1076/Documents/testprojects/heartlungtabdemo/android/app/.cxx/Debug/m3axf30h/arm64-v8a/rnsvg_autolinked_build/cmake_install.cmake")
   include("/Users/cipl1076/Documents/testprojects/heartlungtabdemo/android/app/.cxx/Debug/m3axf30h/arm64-v8a/RNVectorIconsSpec_autolinked_build/cmake_install.cmake")
 
 endif()

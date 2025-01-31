@@ -48,6 +48,7 @@ android/build/
 android/.gradle/
 android/.idea/
 android/app/build/
+android/app/.cxx
 .env
 
 npm-debug.log
