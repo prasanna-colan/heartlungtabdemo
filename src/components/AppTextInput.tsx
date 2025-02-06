@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     
   },
   label: {
-    fontSize: mvs(14),
+    fontSize: mvs(13),
     color: COLORS.Black,
     marginBottom: mvs(8),  // Space between label and input
   },
@@ -94,13 +94,13 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Vertically center the icon and input
     borderRadius: AppBorderRadius,
     backgroundColor: COLORS.LightGray,
-    height: mvs(48),
+    height: mvs(45),
 
   },
   input: {
     flex: 1, // Take up remaining space
     paddingHorizontal: mvs(20),
-    fontSize: mvs(15),
+    fontSize: mvs(14),
     color:COLORS.Black,
     fontWeight:"bold",
     

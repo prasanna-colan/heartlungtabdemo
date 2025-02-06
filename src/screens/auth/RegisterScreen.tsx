@@ -44,7 +44,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
           <Text style={styles.subHeading}>{" I agree with the"} <Text onPress={()=>{navigation.navigate("LoginScreen")}} style={[styles.subHeading, styles.loginTxt]}>{"privacy policy"}</Text></Text>
         </View>
 
-        <AppButton disabled={email == "" || !isPrivacyAgreed} title='Continue' onPress={() => { }} />
+        <AppButton disabled={email == "" || !isPrivacyAgreed} title='Continue' onPress={() => { navigation.navigate("VerifyAccountScreen")}} />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   )

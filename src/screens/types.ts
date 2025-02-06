@@ -7,6 +7,9 @@ export type RootStackParamList = {
   RegisterScreen: undefined;
   OnboardScreen: undefined;
   ForgotPasswordScreen: undefined;
+  VerifyAccountScreen: undefined;
+  ResetPasswordScreen: undefined;
+  SplashScreen: undefined;
   ProfileScreen: undefined;
   Home: undefined;
 };
@@ -19,9 +22,13 @@ export type AuthScreenProps<T extends keyof RootStackParamList> = {
 
 // Predefined types for each auth screen
 // Auth
+export type SplashScreenProps = AuthScreenProps<'SplashScreen'>;
 export type LoginScreenProps = AuthScreenProps<'LoginScreen'>;
 export type RegisterScreenProps = AuthScreenProps<'RegisterScreen'>;
 export type OnboardScreenProps = AuthScreenProps<'OnboardScreen'>;
+export type VerifyAccountScreenProps = AuthScreenProps<'VerifyAccountScreen'>;
+export type ResetPasswordScreenProps = AuthScreenProps<'ResetPasswordScreen'>;
+
 
 
 

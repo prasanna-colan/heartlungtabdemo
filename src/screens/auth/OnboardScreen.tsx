@@ -15,7 +15,7 @@ import DividerLine from '../../components/DividerLine'
 
 const OnboardScreen: React.FC<OnboardScreenProps> = ({ navigation }) => {
   const steps = ["Admin Profile", "Organization Profile", "Teams and Services", "Complete"];
-  const [step, setStep] = useState(2); // Track current step
+  const [step, setStep] = useState(0); // Track current step
   const progressAnim = new Animated.Value(step);
   const TitleName = ["Complete your personal Profile", "Organization Profile", "VENDYS Software as a Service\nLicense Agreement ", "Complete"];
   const options = ['SMS', 'EMAIL'];
@@ -24,9 +24,24 @@ const OnboardScreen: React.FC<OnboardScreenProps> = ({ navigation }) => {
   //Step1: Contact Information
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [selectedNotifyOption, setSelectedNotifyOption] = useState<string>('SMS'); // Default selection
+
+   // Password Validation Checks
+   const hasLowerCase = /[a-z]/.test(password);
+   const hasUpperCase = /[A-Z]/.test(password);
+   const hasSymbol = /[!?@#$%^&*_-]/.test(password);
+   const hasNumber = /[0-9]/.test(password);
+   const isMinLength = password.length >= 8;
+   const isMatch = confirmPassword ? password === confirmPassword : false;
+ 
+   const getColor = (condition: boolean) => {
+     if (password === "") return COLORS.GrayText; // Default color (gray)
+     return condition ? "green" : "red";
+   };
 
   //Step2: organization
   const [orgName, setOrgName] = useState<string>('');
@@ -72,16 +87,24 @@ const OnboardScreen: React.FC<OnboardScreenProps> = ({ navigation }) => {
     );
   };
   const validateStep = () => {
-    if (step === 0) {
-      // Validation for Step 1 (Admin Profile)
-      return firstName.trim() !== '' && lastName.trim() !== '' && email.trim() !== '' && phoneNumber.trim() !== '';
-    } else if (step === 1) {
-      // Validation for Step 2 (Organization Profile)
-      return orgName.trim() !== '' && orgURL.trim() !== '' && orgEmail.trim() !== '' && orgLocation !== undefined && street.trim() !== '' && city.trim() !== '' && addressState.trim() !== '' && zip.trim() !== '' && orgPhone.trim() !== '' && orgEmail.trim() !== '' && orgTestList.length > 0;
-    } else if (step === 2) {
-      // Validation for Step 3 (T&C Agreement)
-      return isTSAgreed; // Boolean state for checkbox (e.g., `useState(false)`)
-    }
+    // if (step === 0) {
+    //   // Validation for Step 1 (Admin Profile)
+    //   const isPasswordValid =
+    //   /[a-z]/.test(password) &&  // At least one lowercase letter
+    //   /[A-Z]/.test(password) &&  // At least one uppercase letter
+    //   /[!?@#$%^&*_-]/.test(password) &&  // At least one symbol
+    //   /[0-9]/.test(password) &&  // At least one numeral
+    //   password.length >= 8 && // Minimum 8 characters
+    //   password === confirmPassword; // Check if passwords match
+
+    //   return firstName.trim() !== '' && lastName.trim() !== '' && email.trim() !== '' && phoneNumber.trim() !== '' && isPasswordValid;
+    // } else if (step === 1) {
+    //   // Validation for Step 2 (Organization Profile)
+    //   return orgName.trim() !== '' && orgURL.trim() !== '' && orgEmail.trim() !== '' && orgLocation !== undefined && street.trim() !== '' && city.trim() !== '' && addressState.trim() !== '' && zip.trim() !== '' && orgPhone.trim() !== '' && orgEmail.trim() !== '' && orgTestList.length > 0;
+    // } else if (step === 2) {
+    //   // Validation for Step 3 (T&C Agreement)
+    //   return isTSAgreed; // Boolean state for checkbox (e.g., `useState(false)`)
+    // }
     return true; // Step 4 (Complete) doesn't need validation
   };
 
@@ -95,14 +118,14 @@ const OnboardScreen: React.FC<OnboardScreenProps> = ({ navigation }) => {
   };
   // Handle Continue button
   const handleNext = () => {
-    if (step < steps.length - 1) {
+    if (step < steps.length - 2) {
       setStep(prev => {
         const nextStep = prev + 1;
         animateProgress(nextStep);
         return nextStep;
       });
     } else {
-      navigation.navigate("Home"); // Navigate on completion
+      navigation.navigate('VendysScreen'); // Navigate on completion
     }
   };
 
@@ -113,6 +136,8 @@ const OnboardScreen: React.FC<OnboardScreenProps> = ({ navigation }) => {
         animateProgress(prevStep);
         return prevStep;
       });
+    }else{
+      navigation.pop()
     }
   };
 
@@ -179,7 +204,33 @@ const OnboardScreen: React.FC<OnboardScreenProps> = ({ navigation }) => {
                   mainStyle={{ width: "45%", marginLeft: mvs(20) }}
                 />
               </View>
-              <View style={{ flexDirection: "row", alignSelf: "flex-start", gap: mvs(20) }}>
+
+              <View style={{ marginTop: mvs(5), flexDirection: "column",  }}>
+                <AppTextInput
+                  label='Password'
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="********"
+                  mainStyle={{ width: "95%" }}
+                  secureTextEntry
+                />
+                <AppTextInput
+                  label='Confirm Password'
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
+                  placeholder="********"
+                  mainStyle={{ width: "95%" }}
+                  secureTextEntry
+                />
+              <Text style={[styles.pwdValidationText, { color: getColor(hasLowerCase) }, { marginTop: mvs(5) }]}>{"At least one lowercase letter [a-z]"}</Text>
+              <Text style={[styles.pwdValidationText, { color: getColor(hasUpperCase) }]}>{"At least one uppercase letter [A-Z]"}</Text>
+              <Text style={[styles.pwdValidationText, { color: getColor(hasSymbol) }]}>{"At least one symbol [!?@#$%^&*_-]"}</Text>
+              <Text style={[styles.pwdValidationText, { color: getColor(hasNumber) }]}>{"At least one numeral [0-9]"}</Text>
+              <Text style={[styles.pwdValidationText, { color: getColor(isMinLength) }]}>{"Minimum 8 characters"}</Text>
+              <Text style={[styles.pwdValidationText, { color: getColor(isMatch) }]}>{"Password match"}</Text>
+
+              </View>
+              <View style={{ marginTop:mvs(20), flexDirection: "row", alignSelf: "flex-start", gap: mvs(20) }}>
                 <AppTextInput
                   label='Phone Number'
                   value={phoneNumber}
@@ -402,6 +453,12 @@ const styles = StyleSheet.create({
   summaryText: {
     color: COLORS.GrayText,
     fontSize: mvs(13),
+    fontWeight: "medium",
+    textAlign: "left",
+  },
+  pwdValidationText: {
+    color: COLORS.GrayText,
+    fontSize: mvs(12),
     fontWeight: "medium",
     textAlign: "left",
   },
