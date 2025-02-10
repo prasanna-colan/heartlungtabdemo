@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  Modal,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import AppScreenHeader from "../../components/AppScreenHeader";
@@ -15,6 +16,7 @@ import AppTextInput from "../../components/AppTextInput";
 import { mvs } from "react-native-size-matters";
 import AppButton from "../../components/AppButton";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import EditProfileModal from "../../components/EditProfileModal";
 
 const userInfo = [
   { label: "First Name", value: "Marvin" },
@@ -37,6 +39,7 @@ const addressInfo = [
 const SettingsScreen = () => {
   const [activeTab, setActiveTab] = useState("basicInfo");
   const [checkedItems, setCheckedItems] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,10 +102,12 @@ const SettingsScreen = () => {
               <View style={styles.profileContainer}>
                 <View>
                   <Text style={styles.drName}>Dr. Marvin McKinney</Text>
-                  <Text style={{color:COLORS.Black}}>Houston Family Medical Clinic</Text>
-                  <Text style={{color:COLORS.Black}}>ID: 1234567890</Text>
+                  <Text style={{ color: COLORS.Black }}>
+                    Houston Family Medical Clinic
+                  </Text>
+                  <Text style={{ color: COLORS.Black }}>ID: 1234567890</Text>
                 </View>
-                <TouchableOpacity style={styles.editBtn}>
+                <TouchableOpacity onPress={()=> setIsModalVisible(true)} style={styles.editBtn}>
                   <Text style={styles.editTxt}>Edit profile</Text>
                 </TouchableOpacity>
               </View>
@@ -123,7 +128,7 @@ const SettingsScreen = () => {
 
               <Text style={styles.basicInfo}>Address</Text>
               <FlatList
-                 style={{marginBottom:25}}
+                style={{ marginBottom: 25 }}
                 data={addressInfo}
                 numColumns={2}
                 keyExtractor={(item, index) => index.toString()}
@@ -133,31 +138,40 @@ const SettingsScreen = () => {
                     <Text style={styles.infoValue}>{item.value}</Text>
                   </View>
                 )}
-                scrollEnabled={false} 
+                scrollEnabled={false}
               />
               <Text style={styles.basicInfo}>Facility Information</Text>
 
               <View style={styles.gridContainer}>
-        {Object.entries(checkedItems).map(([key, value], index) => (
-          <View key={key} style={styles.checkboxContainer}>
-            <Icon 
-              name={value ? "checkbox-marked" : "checkbox-blank-outline"} 
-              size={20} 
-              color={value ? "#007AFF" : "#A0A0A0"} 
-            />
-            <Text style={[styles.label, key === "PADTesting" && styles.boldLabel]}>
-              {key.replace(/([A-Z])/g, " $1").trim()} {/* Formats camelCase to readable text */}
-            </Text>
-          </View>
-        ))}
-      </View>
-            
+                {Object.entries(checkedItems).map(([key, value], index) => (
+                  <View key={key} style={styles.checkboxContainer}>
+                    <Icon
+                      name={
+                        value ? "checkbox-marked" : "checkbox-blank-outline"
+                      }
+                      size={20}
+                      color={value ? "#007AFF" : "#A0A0A0"}
+                    />
+                    <Text
+                      style={[
+                        styles.label,
+                        key === "PADTesting" && styles.boldLabel,
+                      ]}
+                    >
+                      {key.replace(/([A-Z])/g, " $1").trim()}{" "}
+                      {/* Formats camelCase to readable text */}
+                    </Text>
+                  </View>
+                ))}
+              </View>
             </>
           ) : (
-           <ScrollView style={{marginBottom:15}}>
-            <AppButton buttonStyle={{position:'absolute',top:10,right:10}} title="Save changes"/>
+            <ScrollView style={{ marginBottom: 15 }}>
+              <AppButton
+                buttonStyle={{ position: "absolute", top: 10, right: 10 }}
+                title="Save changes"
+              />
               <AppTextInput
-           
                 label="Old Password"
                 placeholder="Enter your old password"
                 mainStyle={{
@@ -181,18 +195,15 @@ const SettingsScreen = () => {
                   marginTop: mvs(10),
                 }}
               />
-              <Text>{'At lease one lowercase letter [a-z]'} </Text>
-              <Text>{'At lease one uppercase letter [A-Z'} </Text>
-              <Text>{'At lease one number [0-9]'} </Text>
-              <Text>{'At lease one special charater [$,%,&]'} </Text>
-              
-             
-              
-
-         </ScrollView>
+              <Text>{"At lease one lowercase letter [a-z]"} </Text>
+              <Text>{"At lease one uppercase letter [A-Z"} </Text>
+              <Text>{"At lease one number [0-9]"} </Text>
+              <Text>{"At lease one special charater [$,%,&]"} </Text>
+            </ScrollView>
           )}
         </ScrollView>
       </View>
+      <EditProfileModal visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
     </SafeAreaView>
   );
 };
@@ -201,7 +212,7 @@ export default SettingsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   settingsTitle: {
     fontSize: 24,
@@ -280,7 +291,7 @@ const styles = StyleSheet.create({
   gridContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginBottom:15
+    marginBottom: 15,
   },
   checkboxContainer: {
     width: "50%", // Two items per row
