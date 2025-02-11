@@ -8,5 +8,6 @@ export const COLORS = {
     progressBarGray:"#D4D4D4",
     darkBlue:"#31538F",
     bgBlue: "#C4CEDB",
-    appRed:"#df2027"
+    appRed:"#df2027",
+    textBlue:"#7193CE"
 }

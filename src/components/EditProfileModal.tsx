@@ -11,7 +11,13 @@ import {
 import { COLORS } from "../../assets/colors";
 import Icon from "react-native-vector-icons/FontAwesome"; // Import Vector Icons
 import AppButton from "./AppButton";
-
+import AppCancelButton from "./AppCancelButton";
+import AppAddNewButton from "./AppAddNewButton";
+import { mvs } from "react-native-size-matters";
+import { AppBorderRadius } from "../constants";
+import AppTextInput from "./AppTextInput";
+import Checkbox from "../../assets/images/svg/Checkbox.svg"
+import UnCheckbox from "../../assets/images/svg/UnCheckbox.svg"
 const EditProfileModal = ({ visible, onClose }) => {
   const [selectedTests, setSelectedTests] = useState([]);
 
@@ -47,53 +53,33 @@ const EditProfileModal = ({ visible, onClose }) => {
             <View style={styles.header}>
               <Text style={styles.title}>Edit user info</Text>
               <View style={styles.buttonGroup}>
-                <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
-                  <Text style={styles.cancelText}>Cancel</Text>
-                </TouchableOpacity>
-               <AppButton title="Save Changes"/>
+                <AppCancelButton onPress={onClose} />
+                <AppAddNewButton noButtonIcon={true} title="Save Changes" onPress={() => { }} />
               </View>
             </View>
 
             {/* Form Fields */}
             <View style={styles.formContainer}>
               <View style={styles.row}>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.label}>First Name</Text>
-                  <TextInput style={styles.input} value="John" />
-                </View>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.label}>Last Name</Text>
-                  <TextInput style={styles.input} value="Michael" />
-                </View>
+                <AppTextInput label={"First Name"} mainStyle={{ width: "48%" }} />
+                <AppTextInput label={"Last Name"} mainStyle={{ width: "48%" }} />
               </View>
 
               <View style={styles.row}>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.label}>Phone Number</Text>
-                  <TextInput style={styles.input} value="123 456 7890" />
-                </View>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.label}>Login Email</Text>
-                  <TextInput style={styles.input} value="johndoe123@gmail.com" />
-                </View>
+                <AppTextInput label={"Phone Number"} keyboardType="phoneNumber" mainStyle={{ width: "48%" }} />
+                <AppTextInput label={"Login Email"} mainStyle={{ width: "48%" }} />
               </View>
 
               <View style={styles.inputContainerFull}>
-                <Text style={styles.label}>Organization Name</Text>
-                <TextInput style={styles.input} value="Lorem Ipsum Lorem Ipsum" />
+                <AppTextInput label={"Organization Name"} placeholder="Lorem Ipsum Lorem Ipsum" mainStyle={{ width: "100%" }} />
               </View>
 
               <View style={styles.inputContainerFull}>
-                <Text style={styles.label}>Organization URL</Text>
-                <TextInput
-                  style={styles.input}
-                  value="http://www.loremipsum.com/123"
-                />
+                <AppTextInput label={"Organization URL"} placeholder="http://www.loremipsum.com/123" mainStyle={{ width: "100%" }} />
               </View>
 
               <View style={styles.inputContainerFull}>
-                <Text style={styles.label}>Number of Locations</Text>
-                <TextInput style={styles.input} placeholder="Enter (1 to 1000)" />
+                <AppTextInput label={"Number of Locations"} placeholder="Enter (1 to 1000)" mainStyle={{ width: "100%" }} />
               </View>
 
               {/* Checkboxes (Two-column Layout) */}
@@ -104,11 +90,13 @@ const EditProfileModal = ({ visible, onClose }) => {
                     style={styles.checkboxRow}
                     onPress={() => toggleCheckbox(test)}
                   >
-                    <Icon
+                    {/* <Icon
                       name={selectedTests.includes(test) ? "check-square" : "square-o"}
                       size={20}
                       color={COLORS.primary}
-                    />
+                    /> */}
+                     {selectedTests.includes(test) ? <Checkbox width={mvs(20)} height={mvs(20)} /> :
+                      <UnCheckbox width={mvs(20)} height={mvs(20)} />}
                     <Text style={styles.checkboxLabel}>{test}</Text>
                   </TouchableOpacity>
                 ))}
@@ -133,8 +121,8 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: "80%",
     backgroundColor: "#fff",
-    padding: 20,
-    borderRadius: 10,
+    padding: mvs(20),
+    borderRadius: mvs(10),
     maxHeight: "80%", // Prevents modal from exceeding screen height
   },
   scrollContainer: {
@@ -144,26 +132,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
+    // marginBottom: mvs(20),
   },
   title: {
-    fontSize: 20,
+    fontSize: mvs(20),
     fontWeight: "bold",
   },
   buttonGroup: {
     flexDirection: "row",
+    gap: mvs(10)
   },
-  cancelButton: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    marginRight: 10,
-    height:47,
-    width:90,
-    marginTop:15,
-    alignItems:'center'
-  },
+
   cancelText: {
     color: "#000",
   },
@@ -181,6 +160,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
+
   },
   inputContainer: {
     width: "48%",
@@ -190,8 +170,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   label: {
-    fontSize: 14,
+    fontSize: mvs(14),
     fontWeight: "600",
+
     marginBottom: 5,
   },
   input: {
@@ -214,7 +195,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   checkboxLabel: {
-    marginLeft: 10,
-    fontSize: 14,
+    marginLeft: mvs(10),
+    fontSize: mvs(14),
   },
 });

@@ -11,6 +11,7 @@ interface AppAddNewButtonProps {
   disabled?: boolean; // If true, disables the button
   buttonStyle?: ViewStyle; // Optional custom style for the button
   textStyle?: TextStyle; // Optional custom style for the button text
+  noButtonIcon?: boolean
 }
 
 const AppAddNewButton: React.FC<AppAddNewButtonProps> = ({
@@ -19,6 +20,7 @@ const AppAddNewButton: React.FC<AppAddNewButtonProps> = ({
   disabled = false,
   buttonStyle = {},
   textStyle = {},
+  noButtonIcon = false
 }) => {
   const scaleValue = new Animated.Value(1);
   const handlePressIn = () => {
@@ -46,21 +48,21 @@ const AppAddNewButton: React.FC<AppAddNewButtonProps> = ({
   };
 
   return (
-    <Animated.View 
-    style={[ { transform: [{ scale: scaleValue }] }]}>
+    <Animated.View
+      style={[{ transform: [{ scale: scaleValue }] }]}>
       <TouchableOpacity
         style={[
           styles.button,
           disabled ? styles.disabledButton : styles.enabledButton,
           buttonStyle,
         ]}
-        onPress={disabled ? () => {} : onPress}
+        onPress={disabled ? () => { } : onPress}
         onPressIn={handlePressIn} // Handle press in animation
         onPressOut={handlePressOut} // Handle press out animation
         activeOpacity={0.8} // Slight opacity feedback on press
         disabled={disabled}
       >
-<AddIcon height={mvs(15)} width={mvs(15)} color={COLORS.white}/>
+        {!noButtonIcon && <AddIcon height={mvs(15)} width={mvs(15)} color={COLORS.white} style={{ marginRight: mvs(5) }} />}
         <Text
           style={[
             styles.text,
@@ -83,13 +85,13 @@ const styles = StyleSheet.create({
     marginVertical: 10, // Optional margin wrapper
   },
   button: {
-    minWidth:mvs(95),
-    flexDirection:"row",
+    minWidth: mvs(95),
+    flexDirection: "row",
     paddingVertical: mvs(10),
     paddingHorizontal: mvs(15),
     borderRadius: AppBorderRadius,
     marginVertical: mvs(10),
-    alignItems:"center", justifyContent:"center",
+    alignItems: "center", justifyContent: "center",
     alignSelf: "flex-start",
     overflow: 'hidden', // Make sure the button doesn't overflow on animation
   },
@@ -97,12 +99,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.darkBlue, // Default enabled background color
   },
   disabledButton: {
-    backgroundColor:COLORS.LightGray, // Disabled button color
+    backgroundColor: COLORS.LightGray, // Disabled button color
   },
   text: {
     fontSize: mvs(12),
     fontWeight: "medium",
-    paddingLeft:mvs(5)
+
   },
   enabledText: {
     color: COLORS.white, // Text color when enabled
