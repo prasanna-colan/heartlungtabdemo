@@ -13,10 +13,15 @@ import React, { useEffect, useState } from "react";
 import AppScreenHeader from "../../components/AppScreenHeader";
 import { COLORS } from "../../../assets/colors";
 import AppTextInput from "../../components/AppTextInput";
-import { mvs } from "react-native-size-matters";
+import { ms, mvs } from "react-native-size-matters";
 import AppButton from "../../components/AppButton";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import EditProfileModal from "../../components/EditProfileModal";
+import AppAddNewButton from "../../components/AppAddNewButton";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { AppBorderRadius } from "../../constants";
+import Checkbox from "../../../assets/images/svg/Checkbox.svg"
+import UnCheckbox from "../../../assets/images/svg/UnCheckbox.svg"
 
 const userInfo = [
   { label: "First Name", value: "Marvin" },
@@ -41,6 +46,21 @@ const SettingsScreen = () => {
   const [checkedItems, setCheckedItems] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  // Password Validation Checks
+  const hasLowerCase = /[a-z]/.test(newPassword);
+  const hasUpperCase = /[A-Z]/.test(newPassword);
+  const hasSymbol = /[!?@#$%^&*_-]/.test(newPassword);
+  const hasNumber = /[0-9]/.test(newPassword);
+  const isMinLength = newPassword.length >= 8;
+  const isMatch = confirmNewPassword ? newPassword === confirmNewPassword : false;
+
+  const getColor = (condition: boolean) => {
+    if (newPassword === "") return COLORS.GrayText; // Default color (gray)
+    return condition ? "green" : "red";
+  };
   useEffect(() => {
     const fetchData = async () => {
       // Simulated API response
@@ -71,21 +91,21 @@ const SettingsScreen = () => {
         <Text style={styles.settingsTitle}>Settings</Text>
 
         <View style={styles.tabContainer}>
-          <Pressable onPress={() => setActiveTab("basicInfo")}>
+          <Pressable style={[{ paddingBottom: mvs(5) }, activeTab === "basicInfo" && { borderBottomWidth: mvs(1), borderBottomColor: COLORS.darkBlue }]} onPress={() => setActiveTab("basicInfo")}>
             <Text
               style={[
                 styles.tabText,
-                activeTab === "basicInfo" && styles.activeTab,
+                activeTab === "basicInfo" && { color: COLORS.darkBlue }
               ]}
             >
               Basic Info
             </Text>
           </Pressable>
-          <Pressable onPress={() => setActiveTab("changePassword")}>
+          <Pressable style={[{ paddingBottom: mvs(5) }, activeTab === "changePassword" && { borderBottomWidth: mvs(1), borderBottomColor: COLORS.darkBlue }]} onPress={() => setActiveTab("changePassword")}>
             <Text
               style={[
                 styles.tabText,
-                activeTab === "changePassword" && styles.activeTab,
+                activeTab === "changePassword" && { color: COLORS.darkBlue }
               ]}
             >
               Change Password
@@ -98,35 +118,38 @@ const SettingsScreen = () => {
           showsVerticalScrollIndicator={false}
         >
           {activeTab === "basicInfo" ? (
-            <>
+            <View style={{paddingBottom:mvs(20)}}>
               <View style={styles.profileContainer}>
                 <View>
                   <Text style={styles.drName}>Dr. Marvin McKinney</Text>
-                  <Text style={{ color: COLORS.Black }}>
+                  <Text style={{ color: COLORS.textBlue, fontSize: mvs(13) }}>
                     Houston Family Medical Clinic
                   </Text>
-                  <Text style={{ color: COLORS.Black }}>ID: 1234567890</Text>
+                  <Text style={{ color: COLORS.textBlue, fontSize: mvs(12) }}>ID: 1234567890</Text>
                 </View>
-                <TouchableOpacity onPress={()=> setIsModalVisible(true)} style={styles.editBtn}>
-                  <Text style={styles.editTxt}>Edit profile</Text>
-                </TouchableOpacity>
+
+                <AppAddNewButton noButtonIcon={true} title="Edit Profile" onPress={() => setIsModalVisible(true)} buttonStyle={{ backgroundColor: COLORS.white, borderWidth: 1, borderColor: COLORS.appRed }} textStyle={{ color: COLORS.appRed }} />
+              </View>
+              <View style={{ width: "100%", backgroundColor: COLORS.LightGray, borderRadius: AppBorderRadius, paddingVertical: mvs(4), paddingHorizontal: mvs(5), marginTop: mvs(10) }}>
+                <Text style={styles.basicInfo}>Basic Info</Text>
               </View>
 
-              <Text style={styles.basicInfo}>Basic Info</Text>
               <FlatList
                 data={userInfo}
                 numColumns={2}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                   <View style={styles.infoBox}>
-                    <Text>{item.label}</Text>
+                  <Text style={{fontSize:mvs(12), color:COLORS.GrayText}}>{item.label}</Text>
                     <Text style={styles.infoValue}>{item.value}</Text>
                   </View>
                 )}
                 scrollEnabled={false}
               />
 
-              <Text style={styles.basicInfo}>Address</Text>
+              <View style={{ width: "100%", backgroundColor: COLORS.LightGray, borderRadius: AppBorderRadius, paddingVertical: mvs(4), paddingHorizontal: mvs(5), marginTop: mvs(10) }}>
+                <Text style={styles.basicInfo}>Address</Text>
+              </View>
               <FlatList
                 style={{ marginBottom: 25 }}
                 data={addressInfo}
@@ -134,24 +157,29 @@ const SettingsScreen = () => {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                   <View style={styles.infoBox}>
-                    <Text>{item.label}</Text>
+                    <Text style={{fontSize:mvs(12), color:COLORS.GrayText}}>{item.label}</Text>
                     <Text style={styles.infoValue}>{item.value}</Text>
                   </View>
                 )}
                 scrollEnabled={false}
               />
-              <Text style={styles.basicInfo}>Facility Information</Text>
+              <View style={{ width: "100%", backgroundColor: COLORS.LightGray, borderRadius: AppBorderRadius, paddingVertical: mvs(4), paddingHorizontal: mvs(5), marginTop: mvs(10) }}>
+                <Text style={styles.basicInfo}>Facility Information</Text>
+              </View>
+
 
               <View style={styles.gridContainer}>
                 {Object.entries(checkedItems).map(([key, value], index) => (
                   <View key={key} style={styles.checkboxContainer}>
-                    <Icon
+                    {/* <Icon
                       name={
                         value ? "checkbox-marked" : "checkbox-blank-outline"
                       }
                       size={20}
                       color={value ? "#007AFF" : "#A0A0A0"}
-                    />
+                    /> */}
+                     {value ? <Checkbox width={mvs(20)} height={mvs(20)} /> :
+                      <UnCheckbox width={mvs(20)} height={mvs(20)} />}
                     <Text
                       style={[
                         styles.label,
@@ -164,42 +192,52 @@ const SettingsScreen = () => {
                   </View>
                 ))}
               </View>
-            </>
+            </View>
           ) : (
-            <ScrollView style={{ marginBottom: 15 }}>
-              <AppButton
-                buttonStyle={{ position: "absolute", top: 10, right: 10 }}
-                title="Save changes"
-              />
-              <AppTextInput
-                label="Old Password"
-                placeholder="Enter your old password"
-                mainStyle={{
-                  width: "35%",
-                  marginTop: mvs(10),
-                }}
-              />
-              <AppTextInput
-                label="New Password"
-                placeholder="Enter your new Password"
-                mainStyle={{
-                  width: "35%",
-                  marginTop: mvs(10),
-                }}
-              />
-              <AppTextInput
-                label="Confirm New password"
-                placeholder="Enter confirm password"
-                mainStyle={{
-                  width: "35%",
-                  marginTop: mvs(10),
-                }}
-              />
-              <Text>{"At lease one lowercase letter [a-z]"} </Text>
-              <Text>{"At lease one uppercase letter [A-Z"} </Text>
-              <Text>{"At lease one number [0-9]"} </Text>
-              <Text>{"At lease one special charater [$,%,&]"} </Text>
-            </ScrollView>
+            <KeyboardAwareScrollView style={{ flex: 1 }} contentContainerStyle={[{ flexGrow: 1, }]}>
+              <View style={{ width: "100%", flexDirection: "row" }}>
+                <View style={{ width: "80%" }}>
+                  <AppTextInput
+                    label="Old Password"
+                    placeholder="Enter your old password"
+                    mainStyle={{
+                      width: "60%",
+                    }}
+                    value={oldPassword}
+                    onChangeText={setOldPassword}
+                  />
+                  <AppTextInput
+                    label="New Password"
+                    placeholder="Enter your new Password"
+                    mainStyle={{
+                      width: "60%",
+                    }}
+                    value={newPassword}
+                    onChangeText={setNewPassword}
+                  />
+                  <AppTextInput
+                    label="Confirm New password"
+                    placeholder="Enter confirm password"
+                    mainStyle={{
+                      width: "60%",
+                    }}
+                    value={confirmNewPassword}
+                    onChangeText={setConfirmNewPassword}
+                  />
+                  <Text style={[styles.pwdValidationText, { color: getColor(hasLowerCase) }, { marginTop: mvs(5) }]}>{"At least one lowercase letter [a-z]"}</Text>
+                  <Text style={[styles.pwdValidationText, { color: getColor(hasUpperCase) }]}>{"At least one uppercase letter [A-Z]"}</Text>
+                  <Text style={[styles.pwdValidationText, { color: getColor(hasSymbol) }]}>{"At least one symbol [!?@#$%^&*_-]"}</Text>
+                  <Text style={[styles.pwdValidationText, { color: getColor(hasNumber) }]}>{"At least one numeral [0-9]"}</Text>
+                  <Text style={[styles.pwdValidationText, { color: getColor(isMinLength) }]}>{"Minimum 8 characters"}</Text>
+                  <Text style={[styles.pwdValidationText, { color: getColor(isMatch) }]}>{"Password match"}</Text>
+                </View>
+                <View style={{ width: "20%" }}>
+                  <AppAddNewButton noButtonIcon={true} title="Save Changes" onPress={() => { }} />
+                </View>
+              </View>
+
+
+            </KeyboardAwareScrollView>
           )}
         </ScrollView>
       </View>
@@ -215,35 +253,36 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   settingsTitle: {
-    fontSize: 24,
-    fontWeight: "500",
-    marginBottom: 15,
+    fontSize: mvs(24),
+    fontWeight: "bold",
   },
   subContainer: {
     flex: 1,
-    padding: 15,
+    padding: mvs(15),
+    backgroundColor: COLORS.bgBlue
   },
   tabContainer: {
     flexDirection: "row",
-    marginBottom: 15,
+    marginVertical: mvs(15),
+    gap: mvs(20)
   },
   tabText: {
-    marginRight: 20,
-    fontSize: 16,
+    fontSize: mvs(13),
+    color: COLORS.textBlue
   },
   activeTab: {
-    borderBottomWidth: 1,
-    color: COLORS.primary,
+    // borderBottomWidth: 1,
+    color: COLORS.darkBlue,
   },
   whiteContainer: {
     flex: 1, // Ensure it takes up space
     backgroundColor: COLORS.white,
-    padding: 15,
-    borderRadius: 10,
+    padding: mvs(15),
+    borderRadius: mvs(10),
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowRadius: mvs(5),
     elevation: 3,
   },
   profileContainer: {
@@ -252,59 +291,66 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   drName: {
-    fontSize: 20,
-    fontWeight: "600",
-    marginBottom: 5,
+    fontSize: mvs(20),
+    fontWeight: "bold",
+    marginBottom: mvs(5),
   },
   editBtn: {
     borderWidth: 1,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 5,
+    paddingVertical: mvs(5),
+    paddingHorizontal: mvs(10),
+    borderRadius: mvs(5),
   },
   editTxt: {
     fontWeight: "500",
   },
   basicInfo: {
     color: COLORS.GrayText,
-    marginTop: 25,
+    fontSize: mvs(13),
+    fontWeight: "bold"
   },
   infoBox: {
     flex: 1,
-    margin: 5,
+    margin: mvs(5),
   },
   infoValue: {
-    marginTop: 5,
-    fontWeight: "bold",
+    marginTop: mvs(5),
+    fontSize:mvs(13), color:COLORS.Black
   },
   header: {
-    fontSize: 18,
+    fontSize: mvs(18),
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: mvs(10),
   },
   sectionHeader: {
-    fontSize: 16,
+    fontSize: mvs(16),
     fontWeight: "600",
     color: "#333",
-    marginBottom: 8,
+    marginBottom: mvs(8),
   },
   gridContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginBottom: 15,
+    paddingVertical: 15,
   },
   checkboxContainer: {
     width: "50%", // Two items per row
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 5,
+    paddingVertical: mvs(5),
   },
   label: {
-    fontSize: 14,
-    marginLeft: 8,
+    fontSize: mvs(14),
+    marginLeft: mvs(8),
     color: "#333",
   },
   boldLabel: {
     fontWeight: "bold",
+  },
+  pwdValidationText: {
+    color: COLORS.GrayText,
+    fontSize: mvs(12),
+    fontWeight: "medium",
+    textAlign: "left",
   },
 });
