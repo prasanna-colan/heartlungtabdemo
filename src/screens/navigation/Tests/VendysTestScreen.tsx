@@ -24,7 +24,7 @@ interface deviceConnection {
   deviceName?:string,
   step?:number
 }
-const VendysScreen = () => {
+const VendysTestScreen = () => {
 
   const [DevicesList, setDevicesList] = useState<("BPcuff" | "LFS" | "RFS")[]>([]);
 const [bpConnection, setBpConnection] = useState<ConnectionPhases>("connecting");
@@ -184,7 +184,7 @@ useEffect(() => {
   )
 }
 
-export default VendysScreen
+export default VendysTestScreen
 
 const styles = StyleSheet.create({
   container: {
