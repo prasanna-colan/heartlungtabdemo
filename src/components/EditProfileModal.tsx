@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
   inputContainerFull: {
     width: "100%",
-    marginTop: 10,
+    marginTop: mvs(5),
   },
   label: {
     fontSize: mvs(14),
@@ -175,24 +175,18 @@ const styles = StyleSheet.create({
 
     marginBottom: 5,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 5,
-    padding: 10,
-    backgroundColor: "#F5F5F5",
-  },
+ 
   checkboxContainer: {
     flexDirection: "row",
     flexWrap: "wrap", // Allows items to wrap into multiple rows
     justifyContent: "space-between",
-    marginTop: 20,
+    marginTop: mvs(20),
   },
   checkboxRow: {
     flexDirection: "row",
     alignItems: "center",
     width: "48%", // Two columns
-    marginBottom: 10,
+    marginBottom: mvs(10),
   },
   checkboxLabel: {
     marginLeft: mvs(10),

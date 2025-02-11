@@ -11,7 +11,7 @@ import { createDrawerNavigator, DrawerScreenProps } from '@react-navigation/draw
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-reanimated';
 import { LoginScreen, OnboardScreen, RegisterScreen, ResetPasswordScreen, SplashScreen, VerifyAccountScreen } from './src/screens/auth';
-import { Home, DashboardScreen, Form1, Form2, VendysScreen, SettingsScreen } from './src/screens/navigation';
+import { Home, DashboardScreen, Form1, Form2, VendysScreen, SettingsScreen, VendysTestScreen } from './src/screens/navigation';
 import DrawerScreenImage from "./assets/images/svg/DrawerScreenImage.svg";
 import { mvs } from 'react-native-size-matters';
 import { COLORS } from './assets/colors';
@@ -98,6 +98,14 @@ export default function App() {
             drawerStyle: { width: drawerWidth * 0.5, backgroundColor: '#FF4500' }
           }}
         />
+         <Drawer.Screen name="VendysTestScreen" component={VendysTestScreen}
+          options={{
+            headerShown: false,
+            header: ({ navigation }) => <CustomHeader navigation={navigation} />,
+            drawerStyle: { width: drawerWidth * 0.5, backgroundColor: '#FF4500' }
+          }}
+        />
+        
          <Drawer.Screen name="SettingsScreen" component={SettingsScreen}
           options={{
             headerShown: false,
