@@ -137,7 +137,7 @@ const OnboardScreen: React.FC<OnboardScreenProps> = ({ navigation }) => {
         return prevStep;
       });
     }else{
-      navigation.pop()
+      navigation.goBack()
     }
   };
 
