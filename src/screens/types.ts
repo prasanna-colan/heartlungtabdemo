@@ -41,6 +41,7 @@ export type ProfileScreenProps = AuthScreenProps<'ProfileScreen'>;
 export type TestsStackParamList = {
   VendysTestScreen: undefined;
   ExistingPatientScreen: undefined;  // No params for this screen
+  FuncTestScreen2: undefined;
   AnotherScreen: { userId: string };  // Example with params
 };
 
@@ -52,3 +53,4 @@ export type TestsScreenProps<T extends keyof TestsStackParamList> = {
 
 export type VendysTestScreenProps = TestsScreenProps<"VendysTestScreen">;
 export type ExistingPatientScreenProps = TestsScreenProps<"ExistingPatientScreen">;
+export type FuncTestScreen2Props = TestsScreenProps<"FuncTestScreen2">;
