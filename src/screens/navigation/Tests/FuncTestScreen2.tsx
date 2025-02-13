@@ -15,10 +15,10 @@ import BPcuffIcon from "../../../../assets/images/svg/BPcuff.svg"
 import HalfBattery from "../../../../assets/images/svg/HalfBattery.svg"
 import LeftFingerSensor from "../../../../assets/images/svg/LeftFingerSensor.svg"
 import RightFingerSensor from "../../../../assets/images/svg/RightFingerSensor.svg"
-import { useIsFocused, useNavigation } from '@react-navigation/native'
+import { useIsFocused } from '@react-navigation/native'
 import Preparation1 from "../../../../assets/images/svg/Preparation1.svg"
 import Preparation2 from "../../../../assets/images/svg/Preparation2.svg"
-import { VendysTestScreenProps } from '../../types'
+import { FuncTestScreen2Props } from '../../types'
 
 type ConnectionPhases = "connecting" | "connected" | "disconnected" |"";
 interface deviceConnection {
@@ -27,13 +27,15 @@ interface deviceConnection {
   deviceName?:string,
   step?:number
 }
-const VendysTestScreen:FC<VendysTestScreenProps> = ({navigation}) => {
+const FuncTestScreen2:FC<FuncTestScreen2Props> = ({navigation}) => {
 
   const [DevicesList, setDevicesList] = useState<("BPcuff" | "LFS" | "RFS")[]>([]);
   const steps = ["Preparation", "BP Measurement", "VENDYS Test", "Result"];
   const [step, setStep] = useState(0); // Track current step
+  const [checkExportAll, setCheckExportAll] = useState<boolean>(false); // Track current step
 
 const isFocused = useIsFocused();
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -82,50 +84,9 @@ const isFocused = useIsFocused();
             step == 0 &&
             <>
                <View style={{ width: "100%", backgroundColor: COLORS.white, marginTop: mvs(10), borderRadius: mvs(10), padding: mvs(20) }}>
-              <View style={{ flexDirection: "row", justifyContent:"space-between" }}>
-                  <View style={{ width: "48%", height: mvs(150) }}>
-                    <View style={{ height: mvs(115), width: "100%" , borderRadius:mvs(20)}}>
-                      <Preparation1 width={"100%"} height={"100%"} preserveAspectRatio="none" />
-                    </View>
-                    <Text style={{ marginTop:mvs(2), fontSize:mvs(10), color:COLORS.Black}}>1. Please make sure the patient is sitting with there hands on the insulation pad or laying with their hands on their sides.</Text>
-                  </View>
-               
-
-                  <View style={{ width: "48%", height: mvs(150) }}>
-                    <View style={{ height: mvs(115), width: "100%" , borderRadius:mvs(20)}}>
-                      <Preparation2 width={"100%"} height={"100%"} preserveAspectRatio="none" />
-                    </View>
-                    <Text style={{ marginTop:mvs(2), fontSize:mvs(10), color:COLORS.Black}}>2. Please make sure the cuff is placed properly on the right upper arm.</Text>
-                  </View>
-              </View>
-
-              <View style={{ flexDirection: "row", justifyContent:"space-between" }}>
-                  <View style={{ width: "32%", height: mvs(150) }}>
-                    <View style={{ height: mvs(115), width: "100%" , borderRadius:mvs(20)}}>
-                      <Image source={images.Preparation3} style={{height: mvs(115),width: "100%", resizeMode:"stretch"}}/>
-                    </View>
-                    <Text style={{ marginTop:mvs(2), fontSize:mvs(10), color:COLORS.Black}}>3. Please make sure the temperature probe with the red sticker to the right finger and the one with the blue sticker to the left finger.</Text>
-                  </View>
-               
-                  <View style={{ width: "42%", height: mvs(150) }}>
-                    <View style={{ height: mvs(115), width: "100%" , borderRadius:mvs(20)}}>
-                    <Image source={images.Preparation4} style={{height: mvs(115),width: "100%", resizeMode:"stretch"}}/>
-                    </View>
-                    <Text style={{ marginTop:mvs(2), fontSize:mvs(10), color:COLORS.Black}}>4. Please place both hands on the smooth side of insulation pad. This will prevent heat from your body and leg from interfering with the fingertip temperature measurement.</Text>
-                  </View>
-
-                  <View style={{ width: "22%", height: mvs(150) }}>
-                    <View style={{ height: mvs(115), width: "100%" , borderRadius:mvs(20)}}>
-                    <Image source={images.Preparation5} style={{height: mvs(115),width: "100%", resizeMode:"stretch"}}/>
-                    </View>
-                    <Text style={{ marginTop:mvs(2), fontSize:mvs(10), color:COLORS.Black}}>5. Please put the heating blanket around your neck.</Text>
-                  </View>
-              </View>
+              
             </View>
-            <View style={{ flexDirection: "row-reverse", width:"100%", gap:mvs(10) }}>
-              <AppAddNewButton noButtonIcon iconSize={12} onPress={() => { }} title='Cancel' buttonStyle={{ backgroundColor: COLORS.bgBlue, paddingVertical: mvs(6), paddingHorizontal: 0 , borderColor:COLORS.darkBlue, borderWidth:mvs(1)}} textStyle={{ color: COLORS.darkBlue, fontSize: mvs(11) }} />
-              <AppAddNewButton noButtonIcon iconSize={12} onPress={() => { }} title='Video' buttonStyle={{ backgroundColor: COLORS.darkBlue, paddingVertical: mvs(6), paddingHorizontal: 0 , borderColor:COLORS.darkBlue, borderWidth:mvs(1)}} textStyle={{ color: COLORS.white, fontSize: mvs(11) }} />
-            </View>
+           
             </>
          
           }
@@ -136,7 +97,7 @@ const isFocused = useIsFocused();
   )
 }
 
-export default VendysTestScreen
+export default FuncTestScreen2
 
 const styles = StyleSheet.create({
   container: {
