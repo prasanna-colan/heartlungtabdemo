@@ -11,7 +11,7 @@ import { createDrawerNavigator, DrawerScreenProps } from '@react-navigation/draw
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-reanimated';
 import { LoginScreen, OnboardScreen, RegisterScreen, ResetPasswordScreen, SplashScreen, VerifyAccountScreen } from './src/screens/auth';
-import { Home, DashboardScreen, Form1, Form2, VendysScreen, SettingsScreen, VendysTestScreen } from './src/screens/navigation';
+import { Home, DashboardScreen, Form1, Form2, VendysScreen, SettingsScreen, VendysTestScreen, ExistingPatientScreen } from './src/screens/navigation';
 import DrawerScreenImage from "./assets/images/svg/DrawerScreenImage.svg";
 import { mvs } from 'react-native-size-matters';
 import { COLORS } from './assets/colors';
@@ -47,19 +47,29 @@ export default function App() {
   }
 
   const AuthStack = () => {
-    return(
-      <Stack.Navigator initialRouteName="SplashScreen"  screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="SplashScreen" component={SplashScreen} />
-      <Stack.Screen name="LoginScreen" component={LoginScreen} />
-      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-      <Stack.Screen name="OnboardScreen" component={OnboardScreen} />
-      <Stack.Screen name="VerifyAccountScreen" component={VerifyAccountScreen} />
-      <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
-      
-    </Stack.Navigator>
+    return (
+      <Stack.Navigator initialRouteName="SplashScreen" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+        <Stack.Screen name="OnboardScreen" component={OnboardScreen} />
+        <Stack.Screen name="VerifyAccountScreen" component={VerifyAccountScreen} />
+        <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
+
+      </Stack.Navigator>
     )
-    
-    };
+
+  };
+
+
+  const TestsStack = () => {
+    return (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="VendysTestScreen" component={VendysTestScreen} />
+        <Stack.Screen name="ExistingPatientScreen" component={ExistingPatientScreen} />
+      </Stack.Navigator>
+    )
+  };
 
   return (
     <NavigationContainer>
@@ -98,13 +108,15 @@ export default function App() {
             drawerStyle: { width: drawerWidth * 0.5, backgroundColor: '#FF4500' }
           }}
         />
-         <Drawer.Screen name="VendysTestScreen" component={VendysTestScreen}
+         {/* <Drawer.Screen name="TestsStack" component={TestsStack} /> */}
+         <Drawer.Screen name="TestsStack" component={TestsStack}
           options={{
             headerShown: false,
-            header: ({ navigation }) => <CustomHeader navigation={navigation} />,
+            // header: ({ navigation }) => <CustomHeader navigation={navigation} />,
             drawerStyle: { width: drawerWidth * 0.5, backgroundColor: '#FF4500' }
           }}
         />
+         
         
          <Drawer.Screen name="SettingsScreen" component={SettingsScreen}
           options={{

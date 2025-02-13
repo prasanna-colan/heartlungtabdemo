@@ -62,7 +62,7 @@ const DrawerContent = () => {
       )}
 
 
-      {/* Device Dropdown */}
+      {/* Tests Dropdown */}
       <TouchableOpacity
         onPress={() => setIsTestExpanded(!isTestExpanded)}
         style={styles.dropdownButton}
@@ -76,7 +76,7 @@ const DrawerContent = () => {
 
       {isTestExpanded && (
         <View style={styles.dropdown}>
-          <TouchableOpacity onPress={() => navigation.navigate("VendysTestScreen")} style={[styles.dropdownItem, activeRoute == "VendysTestScreen" && { backgroundColor: COLORS.bgBlue }]}>
+          <TouchableOpacity onPress={() => navigation.navigate("TestsStack", { screen: "VendysTestScreen" }) } style={[styles.dropdownItem, activeRoute == "VendysTestScreen" && { backgroundColor: COLORS.bgBlue }]}>
             <Text style={styles.dropdownText}>Vendys</Text>
           </TouchableOpacity>
         </View>
@@ -94,8 +94,7 @@ const DrawerContent = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    // paddingTop: 20,
+    backgroundColor: COLORS.white,
   },
   header: {
     alignItems: "center",

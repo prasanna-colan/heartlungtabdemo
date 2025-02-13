@@ -11,7 +11,8 @@ interface AppAddNewButtonProps {
   disabled?: boolean; // If true, disables the button
   buttonStyle?: ViewStyle; // Optional custom style for the button
   textStyle?: TextStyle; // Optional custom style for the button text
-  noButtonIcon?: boolean
+  noButtonIcon?: boolean;
+  iconSize?:number
 }
 
 const AppAddNewButton: React.FC<AppAddNewButtonProps> = ({
@@ -20,7 +21,8 @@ const AppAddNewButton: React.FC<AppAddNewButtonProps> = ({
   disabled = false,
   buttonStyle = {},
   textStyle = {},
-  noButtonIcon = false
+  noButtonIcon = false,
+  iconSize = 15
 }) => {
   const scaleValue = new Animated.Value(1);
   const handlePressIn = () => {
@@ -62,7 +64,7 @@ const AppAddNewButton: React.FC<AppAddNewButtonProps> = ({
         activeOpacity={0.8} // Slight opacity feedback on press
         disabled={disabled}
       >
-        {!noButtonIcon && <AddIcon height={mvs(15)} width={mvs(15)} color={COLORS.white} style={{ marginRight: mvs(5) }} />}
+        {!noButtonIcon && <AddIcon height={mvs(iconSize)} width={mvs(iconSize)} color={COLORS.white} style={{ marginRight: mvs(5) }} />}
         <Text
           style={[
             styles.text,
