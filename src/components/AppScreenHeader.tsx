@@ -20,7 +20,7 @@ const AppScreenHeader: React.FC<AppScreenHeaderProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    height: mvs(50),
+    height: mvs(42),
     width: "100%",
     backgroundColor: COLORS.white,
     alignItems: "flex-end",

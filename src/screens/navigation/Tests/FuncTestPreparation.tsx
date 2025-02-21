@@ -17,11 +17,14 @@ import LeftFingerSensor from "../../../../assets/images/svg/LeftFingerSensor.svg
 import RightFingerSensor from "../../../../assets/images/svg/RightFingerSensor.svg"
 import { useIsFocused } from '@react-navigation/native'
 import R_finger from "../../../../assets/images/svg/R_finger.svg"
+import SpeakerOff from "../../../../assets/images/svg/SpeakerOff.svg"
+import MenuIcon from "../../../../assets/images/svg/MenuIcon.svg"
+
 import L_Finger from "../../../../assets/images/svg/L_Finger.svg"
 import RoomTemp from "../../../../assets/images/svg/RoomTemp.svg"
 import Dot_Icon from "../../../../assets/images/svg/Dot.svg"
 
-import { FuncTestScreen2Props } from '../../types'
+import { FuncTestPreparationProps } from '../../types'
 
 type ConnectionPhases = "connecting" | "connected" | "disconnected" |"";
 interface deviceConnection {
@@ -30,7 +33,7 @@ interface deviceConnection {
   deviceName?:string,
   step?:number
 }
-const FuncTestScreen2:FC<FuncTestScreen2Props> = ({navigation}) => {
+const FuncTestPreparation:FC<FuncTestPreparationProps> = ({navigation}) => {
 
   const [DevicesList, setDevicesList] = useState<("BPcuff" | "LFS" | "RFS")[]>([]);
   const steps = ["Preparation", "BP Measurement", "VENDYS Test", "Result"];
@@ -45,6 +48,21 @@ const isFocused = useIsFocused();
       <AppScreenHeader />
       <KeyboardAwareScrollView style={{ flex: 1 }} contentContainerStyle={[{ flexGrow: 1 }]}>
         <View style={{ width: "100%", height: "100%", backgroundColor: COLORS.bgBlue, paddingHorizontal: mvs(25), paddingVertical: mvs(15) }}>
+          <View style={{width:"100%", flexDirection:"row"}}>
+            <View style={{width:"34%"}}>
+            <Text numberOfLines={1} style={{fontSize:mvs(10), color:COLORS.Black }}>VENDYS Vascular Function Test</Text>
+            </View>
+            <View style={{width:"33%", alignItems:"center"}}>
+            <Text numberOfLines={1} style={{fontSize:mvs(9.5), color:COLORS.Black }}>Esther Howard</Text>
+            </View>
+            <View style={{width:"33%", flexDirection:"row", alignItems:"center", justifyContent:"flex-end"}}>
+              <View style={{padding:mvs(5), backgroundColor:COLORS.white, borderRadius:mvs(5), alignSelf:"center", aspectRatio:1, flexShrink:1}}>
+              <SpeakerOff height={mvs(18)} width={mvs(18)} />
+              </View>
+            <MenuIcon height={mvs(18)} width={mvs(18)} style={{ marginLeft:mvs(10)}}/>
+            </View>
+    
+          </View>
           <View style={{ flexDirection: "row", width: "100%", flexShrink:1 }}>
             <View style={styles.progressContainer}>
               {steps.map((stepName, index) => (
@@ -79,14 +97,13 @@ const isFocused = useIsFocused();
               ))}
             </View>
             <View style={{ flexDirection: "row-reverse", width:"40%", alignSelf:"flex-end", gap:mvs(10) }}>
-              <AppAddNewButton noButtonIcon onPress={() => {   }} title='Back' buttonStyle={{ backgroundColor: COLORS.bgBlue, paddingVertical: mvs(6), paddingHorizontal: 0 , borderWidth:1 }} textStyle={{ color: COLORS.Black, fontSize: mvs(11) }} />
-              <AppAddNewButton noButtonIcon onPress={() => {  }} title='Check All' buttonStyle={{ backgroundColor: COLORS.greenButton, paddingVertical: mvs(6), paddingHorizontal: mvs(5) }} textStyle={{ color: COLORS.white, fontSize: mvs(11) }} />
+              <AppAddNewButton noButtonIcon onPress={() => { navigation.navigate("FuncTestBPMeasure") }} title='Next' buttonStyle={{ backgroundColor: COLORS.greenButton, paddingVertical: mvs(6), paddingHorizontal: mvs(5) }} textStyle={{ color: COLORS.white, fontSize: mvs(11) }} />
             </View>
           </View>
           {
             step == 0 &&
             <>
-              <View style={{ width: "100%", height: "85%", flexDirection: "row", marginTop: mvs(10), justifyContent: "space-between" }}>
+              <View style={{ width: "100%", height: "80%", flexDirection: "row", marginTop: mvs(10), justifyContent: "space-between" }}>
                 <View style={{ width: "68%", height: "100%", backgroundColor: COLORS.white, borderRadius: mvs(10), alignItems: "center", justifyContent: "center" }}>
                   <Image source={images.VendysGraphicsIsolated} style={{ height: mvs(300), width: mvs(200), resizeMode: "contain" }} />
                 </View>
@@ -159,7 +176,7 @@ const isFocused = useIsFocused();
   )
 }
 
-export default FuncTestScreen2
+export default FuncTestPreparation
 
 const styles = StyleSheet.create({
   container: {

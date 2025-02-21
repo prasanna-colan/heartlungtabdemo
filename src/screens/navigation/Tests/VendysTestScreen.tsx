@@ -74,7 +74,7 @@ const isFocused = useIsFocused();
               ))}
             </View>
             <View style={{ flexDirection: "row-reverse", width:"40%", alignSelf:"flex-end", gap:mvs(10) }}>
-              <AppAddNewButton iconSize={12} onPress={() => { navigation.navigate("FuncTestScreen2")  }} title='New Patient' buttonStyle={{ backgroundColor: COLORS.appRed, paddingVertical: mvs(6), paddingHorizontal: 0 }} textStyle={{ color: COLORS.white, fontSize: mvs(11) }} />
+              <AppAddNewButton iconSize={12} onPress={() => { navigation.navigate("FuncTestPreparation")  }} title='New Patient' buttonStyle={{ backgroundColor: COLORS.appRed, paddingVertical: mvs(6), paddingHorizontal: 0 }} textStyle={{ color: COLORS.white, fontSize: mvs(11) }} />
               <AppAddNewButton iconSize={12} onPress={() => { navigation.navigate("ExistingPatientScreen") }} title='Existing Patient' buttonStyle={{ backgroundColor: COLORS.darkBlue, paddingVertical: mvs(6), paddingHorizontal: mvs(5) }} textStyle={{ color: COLORS.white, fontSize: mvs(11) }} />
             </View>
           </View>

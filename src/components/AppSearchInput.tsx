@@ -4,7 +4,7 @@ import { mvs } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon library
 import { COLORS } from '../../assets/colors';
 import { AppBorderRadius } from '../constants';
-
+import SearchIcon from "../../assets/images/svg/SearchIcon.svg"
 // Define types for the props
 interface AppSearchInputProps {
   value: string | number | undefined ; // Value of the input
@@ -50,6 +50,7 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
       
       {/* Text Input */}
       <View style={styles.inputContainer}>
+        <SearchIcon height={mvs(20)} width={mvs(20)}/>
         <TextInput
           keyboardType={getKeyboardType()}
           style={[styles.input, inputStyle]}
@@ -66,7 +67,6 @@ const AppSearchInput: React.FC<AppSearchInputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: mvs(10),  // Space between inputs
     
   },
   label: {
@@ -77,18 +77,20 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row', // Align input and icon horizontally
     alignItems: 'center', // Vertically center the icon and input
+    borderWidth:1,
     borderRadius: AppBorderRadius,
-    backgroundColor: COLORS.LightGray,
-    height: mvs(45),
+    borderColor:COLORS.GrayText,
+    backgroundColor: COLORS.white,
+    height: mvs(40),
+    paddingHorizontal:mvs(10)
 
   },
   input: {
     flex: 1, // Take up remaining space
-    paddingHorizontal: mvs(20),
+    paddingHorizontal: mvs(10),
+    marginLeft:mvs(5),
     fontSize: mvs(14),
     color:COLORS.Black,
-    fontWeight:"bold",
-    
   },
   icon: {
     paddingRight:mvs(10),

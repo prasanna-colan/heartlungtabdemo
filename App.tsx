@@ -11,7 +11,7 @@ import { createDrawerNavigator, DrawerScreenProps } from '@react-navigation/draw
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-reanimated';
 import { LoginScreen, OnboardScreen, RegisterScreen, ResetPasswordScreen, SplashScreen, VerifyAccountScreen } from './src/screens/auth';
-import { Home, DashboardScreen, Form1, Form2, VendysScreen, SettingsScreen, VendysTestScreen, ExistingPatientScreen, FuncTestScreen2 } from './src/screens/navigation';
+import { Home, DashboardScreen, Form1, Form2, VendysScreen, SettingsScreen, VendysTestScreen, ExistingPatientScreen, FuncTestPreparation, FuncTestBPMeasure } from './src/screens/navigation';
 import DrawerScreenImage from "./assets/images/svg/DrawerScreenImage.svg";
 import { mvs } from 'react-native-size-matters';
 import { COLORS } from './assets/colors';
@@ -67,8 +67,8 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="VendysTestScreen" component={VendysTestScreen} />
         <Stack.Screen name="ExistingPatientScreen" component={ExistingPatientScreen} />
-        <Stack.Screen name="FuncTestScreen2" component={FuncTestScreen2} />
-        
+        <Stack.Screen name="FuncTestPreparation" component={FuncTestPreparation} />
+        <Stack.Screen name="FuncTestBPMeasure" component={FuncTestBPMeasure} />        
       </Stack.Navigator>
     )
   };
