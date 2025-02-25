@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface sampleDrawerTests : XCTestCase
+@interface livelongvendys3providerTests : XCTestCase
 
 @end
 
-@implementation sampleDrawerTests
+@implementation livelongvendys3providerTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

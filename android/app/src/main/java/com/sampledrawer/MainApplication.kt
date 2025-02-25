@@ -1,4 +1,4 @@
-package com.sampledrawer
+package com.livelongvendys3provider
 
 import android.app.Application
 import com.facebook.react.PackageList
