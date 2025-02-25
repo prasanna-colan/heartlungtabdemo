@@ -648,7 +648,7 @@
     "ios": {
       "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/ios",
       "xcodeProject": {
-        "name": "sampleDrawer.xcworkspace",
+        "name": "livelongvendys3provider.xcworkspace",
         "path": ".",
         "isWorkspace": true
       },
@@ -657,8 +657,8 @@
     "android": {
       "sourceDir": "/Users/cipl1076/Documents/testprojects/heartlungtabdemo/android",
       "appName": "app",
-      "packageName": "com.sampledrawer",
-      "applicationId": "com.sampledrawer",
+      "packageName": "com.livelongvendys3provider",
+      "applicationId": "com.livelongvendys3provider",
       "mainActivity": ".MainActivity",
       "assets": []
     }

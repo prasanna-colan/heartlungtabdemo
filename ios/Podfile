@@ -14,7 +14,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'sampleDrawer' do
+target 'livelongvendys3providerys3provider' do
   config = use_native_modules!
 
   use_react_native!(
@@ -23,7 +23,7 @@ target 'sampleDrawer' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'sampleDrawerTests' do
+  target 'livelongvendys3providerys3providerTests' do
     inherit! :complete
     # Pods for testing
   end
